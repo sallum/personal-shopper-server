@@ -11,7 +11,7 @@ package com.generated.sources;
 @java.lang.SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class PersonalShopper extends org.jooq.impl.SchemaImpl {
 
-	private static final long serialVersionUID = 2132769112;
+	private static final long serialVersionUID = 1500847099;
 
 	/**
 	 * The singleton instance of <code>personal_shopper</code>
@@ -35,6 +35,7 @@ public class PersonalShopper extends org.jooq.impl.SchemaImpl {
 	private final java.util.List<org.jooq.Table<?>> getTables0() {
 		return java.util.Arrays.<org.jooq.Table<?>>asList(
 			com.generated.sources.tables.Articles.ARTICLES,
+			com.generated.sources.tables.ArticleShop.ARTICLE_SHOP,
 			com.generated.sources.tables.Shops.SHOPS);
 	}
 }

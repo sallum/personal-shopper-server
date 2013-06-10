@@ -19,6 +19,11 @@ public class Tables {
 	public static final com.generated.sources.tables.Articles ARTICLES = com.generated.sources.tables.Articles.ARTICLES;
 
 	/**
+	 * The table personal_shopper.article_shop
+	 */
+	public static final com.generated.sources.tables.ArticleShop ARTICLE_SHOP = com.generated.sources.tables.ArticleShop.ARTICLE_SHOP;
+
+	/**
 	 * The table personal_shopper.shops
 	 */
 	public static final com.generated.sources.tables.Shops SHOPS = com.generated.sources.tables.Shops.SHOPS;

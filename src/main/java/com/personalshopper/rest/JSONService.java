@@ -17,32 +17,48 @@ import javax.ws.rs.core.Response;
 
 import com.generated.sources.tables.pojos.Articles;
 import com.generated.sources.tables.pojos.Shops;
-import com.personalshopper.workers.ArticleThread;
+import com.personalshopper.workers.ArticleListByLocationThread;
+import com.personalshopper.workers.ArticleListThread;
 import com.personalshopper.workers.ShopListThread;
 import com.personalshopper.workers.ShopThread;
 
+/**
+ * Server's REST interface.
+ * 
+ * @author Ignacio Mulas
+ * 
+ */
 @Path("/json")
 public class JSONService {
 
+	/**
+	 * Common thread pool to attend incoming requests
+	 */
 	private final ExecutorService threadPool = Executors.newCachedThreadPool();
 
 	@POST
 	@Path("/post")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createTrackInJSON(String entity) {
+		// TODO: Methods POST will be used to introduce data in the db
 		String result = "Post method answer";
 		return Response.status(201).entity(result).build();
 	}
 
+	/**
+	 * Gets all articles in the database
+	 * 
+	 * @return
+	 */
 	@GET
-	@Path("/get/article")
+	@Path("/get/articles")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Articles getArticleInJSON() {
-		ArticleThread articleThread = new ArticleThread();
-		Future<Articles> future = threadPool.submit(articleThread);
-		Articles article = null;
+	public List<Articles> getAllArticles() {
+		ArticleListThread articleThread = new ArticleListThread();
+		Future<List<Articles>> future = threadPool.submit(articleThread);
+		List<Articles> articleList = null;
 		try {
-			article = future.get();
+			articleList = future.get();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -50,13 +66,46 @@ public class JSONService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return article;
+		return articleList;
 	}
 
+	/**
+	 * Gets articles near to the location provided
+	 * 
+	 * @param latitude
+	 * @param longitude
+	 * @return
+	 */
+	@GET
+	@Path("/get/articles/latitude/{latitude}/longitude/{longitude}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Articles> getAllArticlesByLocation(@PathParam("latitude") float latitude,
+			@PathParam("longitude") float longitude) {
+		ArticleListByLocationThread articleThread = new ArticleListByLocationThread(latitude, longitude);
+		Future<List<Articles>> future = threadPool.submit(articleThread);
+		List<Articles> articleList = null;
+		try {
+			articleList = future.get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return articleList;
+	}
+
+	/**
+	 * Gets shop data using shop id
+	 * 
+	 * @param shopId
+	 * @return
+	 */
 	@GET
 	@Path("/get/shop/id/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Shops getShopInJSON(@PathParam("id") long shopId) {
+	public Shops getShop(@PathParam("id") long shopId) {
 		ShopThread shopThread = new ShopThread(shopId);
 		Future<Shops> future = threadPool.submit(shopThread);
 		Shops shop = null;
@@ -72,6 +121,13 @@ public class JSONService {
 		return shop;
 	}
 
+	/**
+	 * Get close shops to a given location
+	 * 
+	 * @param latitude
+	 * @param longitude
+	 * @return
+	 */
 	@GET
 	@Path("/get/shop/latitude/{latitude}/longitude/{longitude}")
 	@Produces(MediaType.APPLICATION_JSON)

@@ -27,6 +27,7 @@ public class Keys {
 
 	public static final org.jooq.UniqueKey<com.generated.sources.tables.records.ArticlesRecord> KEY_ARTICLES_PRIMARY = UniqueKeys0.KEY_ARTICLES_PRIMARY;
 	public static final org.jooq.UniqueKey<com.generated.sources.tables.records.ArticlesRecord> KEY_ARTICLES_ARTICLE_ID = UniqueKeys0.KEY_ARTICLES_ARTICLE_ID;
+	public static final org.jooq.UniqueKey<com.generated.sources.tables.records.ArticleShopRecord> KEY_ARTICLE_SHOP_PRIMARY = UniqueKeys0.KEY_ARTICLE_SHOP_PRIMARY;
 	public static final org.jooq.UniqueKey<com.generated.sources.tables.records.ShopsRecord> KEY_SHOPS_PRIMARY = UniqueKeys0.KEY_SHOPS_PRIMARY;
 	public static final org.jooq.UniqueKey<com.generated.sources.tables.records.ShopsRecord> KEY_SHOPS_SHOP_ID = UniqueKeys0.KEY_SHOPS_SHOP_ID;
 
@@ -34,6 +35,8 @@ public class Keys {
 	// FOREIGN KEY definitions
 	// -------------------------------------------------------------------------
 
+	public static final org.jooq.ForeignKey<com.generated.sources.tables.records.ArticleShopRecord, com.generated.sources.tables.records.ArticlesRecord> ARTICLE_SHOP_IBFK_1 = ForeignKeys0.ARTICLE_SHOP_IBFK_1;
+	public static final org.jooq.ForeignKey<com.generated.sources.tables.records.ArticleShopRecord, com.generated.sources.tables.records.ShopsRecord> ARTICLE_SHOP_IBFK_2 = ForeignKeys0.ARTICLE_SHOP_IBFK_2;
 
 	// -------------------------------------------------------------------------
 	// [#1459] distribute members to avoid static initialisers > 64kb
@@ -47,7 +50,13 @@ public class Keys {
 	private static class UniqueKeys0 extends org.jooq.impl.AbstractKeys {
 		public static final org.jooq.UniqueKey<com.generated.sources.tables.records.ArticlesRecord> KEY_ARTICLES_PRIMARY = createUniqueKey(com.generated.sources.tables.Articles.ARTICLES, com.generated.sources.tables.Articles.ARTICLES.ARTICLE_ID);
 		public static final org.jooq.UniqueKey<com.generated.sources.tables.records.ArticlesRecord> KEY_ARTICLES_ARTICLE_ID = createUniqueKey(com.generated.sources.tables.Articles.ARTICLES, com.generated.sources.tables.Articles.ARTICLES.ARTICLE_ID);
+		public static final org.jooq.UniqueKey<com.generated.sources.tables.records.ArticleShopRecord> KEY_ARTICLE_SHOP_PRIMARY = createUniqueKey(com.generated.sources.tables.ArticleShop.ARTICLE_SHOP, com.generated.sources.tables.ArticleShop.ARTICLE_SHOP.ARTICLE_ID);
 		public static final org.jooq.UniqueKey<com.generated.sources.tables.records.ShopsRecord> KEY_SHOPS_PRIMARY = createUniqueKey(com.generated.sources.tables.Shops.SHOPS, com.generated.sources.tables.Shops.SHOPS.SHOP_ID);
 		public static final org.jooq.UniqueKey<com.generated.sources.tables.records.ShopsRecord> KEY_SHOPS_SHOP_ID = createUniqueKey(com.generated.sources.tables.Shops.SHOPS, com.generated.sources.tables.Shops.SHOPS.SHOP_ID);
+	}
+
+	private static class ForeignKeys0 extends org.jooq.impl.AbstractKeys {
+		public static final org.jooq.ForeignKey<com.generated.sources.tables.records.ArticleShopRecord, com.generated.sources.tables.records.ArticlesRecord> ARTICLE_SHOP_IBFK_1 = createForeignKey(com.generated.sources.Keys.KEY_ARTICLES_PRIMARY, com.generated.sources.tables.ArticleShop.ARTICLE_SHOP, com.generated.sources.tables.ArticleShop.ARTICLE_SHOP.ARTICLE_ID);
+		public static final org.jooq.ForeignKey<com.generated.sources.tables.records.ArticleShopRecord, com.generated.sources.tables.records.ShopsRecord> ARTICLE_SHOP_IBFK_2 = createForeignKey(com.generated.sources.Keys.KEY_SHOPS_PRIMARY, com.generated.sources.tables.ArticleShop.ARTICLE_SHOP, com.generated.sources.tables.ArticleShop.ARTICLE_SHOP.SHOP_ID);
 	}
 }
