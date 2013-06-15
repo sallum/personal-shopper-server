@@ -1,9 +1,5 @@
-package com.personalshopper.workers;
+package com.personalshopper.services.workers;
 
-import static com.personalshopper.data.tables.Shops.SHOPS;
-
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -12,6 +8,7 @@ import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
+import com.personalshopper.dao.Dao;
 import com.personalshopper.data.tables.pojos.Shops;
 
 /**
@@ -19,20 +16,20 @@ import com.personalshopper.data.tables.pojos.Shops;
  * 
  * @author Ignacio Mulas
  */
-public class ShopListThread extends DbController implements Callable<List<Shops>> {
-
-	private final float latitude;
-	private final float longitude;
+public class ShopListByZoneThread implements Callable<List<Shops>> {
 
 	// 3'' ~ 30 meters
 	// We say that we want all the shops in 500m -> 500/30 = 17''
 	// In decimal coordinates = 17/3600 = 0,00472
 	private static final float RADIUS = 0.00472f;
 
-	public ShopListThread(float latitude, float longitude) {
-		super();
+	private final float latitude;
+	private final float longitude;
+
+	public ShopListByZoneThread(float latitude, float longitude) {
 		this.latitude = latitude;
 		this.longitude = longitude;
+
 		// TODO Using this constructor the thread should give back the shops
 		// within a range
 		// TODO: Which range? Is it configurable by the user?
@@ -42,30 +39,16 @@ public class ShopListThread extends DbController implements Callable<List<Shops>
 
 	@Override
 	public List<Shops> call() {
-		Connection conn = null;
 		List<Shops> shopList = new ArrayList<Shops>();
-
 		try {
-			conn = connectToMySQL();
-			DSLContext create = DSL.using(conn, SQLDialect.MYSQL);
-			shopList = create.select().from(SHOPS)
-					.where(SHOPS.LATITUD.between((double) (latitude - RADIUS)).and((double) (latitude + RADIUS)))
-					.and(SHOPS.LONGITUD.between((double) (longitude - RADIUS)).and((double) (longitude + RADIUS)))
-					.fetchInto(Shops.class);
+			DSLContext create = DSL.using(Dao.getConnection(), SQLDialect.MYSQL);
+			shopList = Dao.fetchShopsByZone(create, latitude, longitude, RADIUS);
 		} catch (Exception e) {
 			// TODO: Update exception handling...
 			// For the sake of this tutorial, let's keep exception handling
 			// simple
 			e.printStackTrace();
-		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException ignore) {
-				}
-			}
 		}
-
 		return shopList;
 	}
 }

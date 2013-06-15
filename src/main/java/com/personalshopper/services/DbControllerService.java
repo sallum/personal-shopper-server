@@ -1,4 +1,4 @@
-package com.personalshopper.workers;
+package com.personalshopper.services;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -16,21 +16,21 @@ import com.personalshopper.dao.Utils;
  * 
  * @author Ignacio Mulas
  */
-public class DbController {
+public class DbControllerService {
 
 	// TODO: Use guice and put all this class in the provider
 	private ComboPooledDataSource mCpds;
-	private final Logger logger = Logger.getLogger(DbController.class);
+	private final Logger logger = Logger.getLogger(DbControllerService.class);
 
-	public DbController() {
+	public DbControllerService() {
 		if (mCpds == null) {
 			mCpds = new ComboPooledDataSource();
 			setProperties();
 		}
 	}
 
-	protected Connection connectToMySQL() throws InstantiationException, IllegalAccessException,
-			ClassNotFoundException, SQLException {
+	public Connection getConnection() throws InstantiationException, IllegalAccessException, ClassNotFoundException,
+			SQLException {
 		return mCpds.getConnection();
 	}
 

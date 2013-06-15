@@ -1,4 +1,4 @@
-package com.personalshopper.rest;
+package com.personalshopper.services;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -19,10 +19,10 @@ import org.apache.log4j.Logger;
 
 import com.personalshopper.data.tables.pojos.Articles;
 import com.personalshopper.data.tables.pojos.Shops;
-import com.personalshopper.workers.ArticleListByLocationThread;
-import com.personalshopper.workers.ArticleListThread;
-import com.personalshopper.workers.ShopListThread;
-import com.personalshopper.workers.ShopThread;
+import com.personalshopper.services.workers.ArticleListByZoneThread;
+import com.personalshopper.services.workers.ArticleListThread;
+import com.personalshopper.services.workers.ShopListByZoneThread;
+import com.personalshopper.services.workers.ShopThread;
 
 /**
  * Server's REST interface.
@@ -31,13 +31,13 @@ import com.personalshopper.workers.ShopThread;
  * 
  */
 @Path("/json")
-public class JSONService {
+public class RestJsonService {
 
 	/**
 	 * Common thread pool to attend incoming requests
 	 */
 	private final ExecutorService threadPool = Executors.newCachedThreadPool();
-	private final Logger logger = Logger.getLogger(JSONService.class);
+	private final Logger logger = Logger.getLogger(RestJsonService.class);
 
 	@POST
 	@Path("/post")
@@ -84,7 +84,7 @@ public class JSONService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Articles> getAllArticlesByLocation(@PathParam("latitude") float latitude,
 			@PathParam("longitude") float longitude) {
-		ArticleListByLocationThread articleThread = new ArticleListByLocationThread(latitude, longitude);
+		ArticleListByZoneThread articleThread = new ArticleListByZoneThread(latitude, longitude);
 		Future<List<Articles>> future = threadPool.submit(articleThread);
 		List<Articles> articleList = null;
 		try {
@@ -136,7 +136,7 @@ public class JSONService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Shops> getShops(@PathParam("latitude") float latitude, @PathParam("longitude") float longitude) {
 		// TODO: Will return a list of shops in the area
-		ShopListThread shopListThread = new ShopListThread(latitude, longitude);
+		ShopListByZoneThread shopListThread = new ShopListByZoneThread(latitude, longitude);
 		Future<List<Shops>> future = threadPool.submit(shopListThread);
 		List<Shops> shopList = null;
 		try {

@@ -13,7 +13,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jersey.server.version>1.8</jersey.server.version>
-		<jersey.json.version>1.8</jersey.json.version>
 	</properties>
 
 	<repositories>
@@ -55,7 +54,7 @@
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-json</artifactId>
-			<version>${jersey.json.version}</version>
+			<version>${jersey.server.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jooq</groupId>
@@ -107,8 +106,6 @@
 					</execution>
 				</executions>
 
-				<!-- Manage the plugin's dependency. In this example, we'll use a Postgres 
-					database -->
 				<dependencies>
 					<dependency>
 						<groupId>mysql</groupId>
