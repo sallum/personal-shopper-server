@@ -1,8 +1,8 @@
 package com.personalshopper.workers;
 
-import static com.generated.sources.tables.ArticleShop.ARTICLE_SHOP;
-import static com.generated.sources.tables.Articles.ARTICLES;
-import static com.generated.sources.tables.Shops.SHOPS;
+import static com.personalshopper.data.tables.ArticleShop.ARTICLE_SHOP;
+import static com.personalshopper.data.tables.Articles.ARTICLES;
+import static com.personalshopper.data.tables.Shops.SHOPS;
 
 import java.sql.Connection;
 import java.util.List;
@@ -11,7 +11,7 @@ import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
-import com.generated.sources.tables.pojos.Articles;
+import com.personalshopper.data.tables.pojos.Articles;
 
 /**
  * This class will fetch information in the near area of the provided location.
@@ -30,6 +30,7 @@ public class ArticleListByLocationThread extends ArticleListThread {
 	private static final float RADIUS = 0.00472f;
 
 	public ArticleListByLocationThread(float latitude, float longitude) {
+		super();
 		this.latitude = latitude;
 		this.longitude = longitude;
 		// TODO Using this constructor the thread should give back the articles

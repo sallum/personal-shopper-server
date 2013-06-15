@@ -1,6 +1,6 @@
 package com.personalshopper.workers;
 
-import static com.generated.sources.tables.Shops.SHOPS;
+import static com.personalshopper.data.tables.Shops.SHOPS;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -12,7 +12,7 @@ import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
-import com.generated.sources.tables.pojos.Shops;
+import com.personalshopper.data.tables.pojos.Shops;
 
 /**
  * This class retrieves a list of shops within an area
@@ -30,6 +30,7 @@ public class ShopListThread extends DbController implements Callable<List<Shops>
 	private static final float RADIUS = 0.00472f;
 
 	public ShopListThread(float latitude, float longitude) {
+		super();
 		this.latitude = latitude;
 		this.longitude = longitude;
 		// TODO Using this constructor the thread should give back the shops

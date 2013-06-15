@@ -15,8 +15,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.generated.sources.tables.pojos.Articles;
-import com.generated.sources.tables.pojos.Shops;
+import org.apache.log4j.Logger;
+
+import com.personalshopper.data.tables.pojos.Articles;
+import com.personalshopper.data.tables.pojos.Shops;
 import com.personalshopper.workers.ArticleListByLocationThread;
 import com.personalshopper.workers.ArticleListThread;
 import com.personalshopper.workers.ShopListThread;
@@ -35,6 +37,7 @@ public class JSONService {
 	 * Common thread pool to attend incoming requests
 	 */
 	private final ExecutorService threadPool = Executors.newCachedThreadPool();
+	private final Logger logger = Logger.getLogger(JSONService.class);
 
 	@POST
 	@Path("/post")

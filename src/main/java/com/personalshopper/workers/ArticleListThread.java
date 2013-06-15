@@ -1,6 +1,6 @@
 package com.personalshopper.workers;
 
-import static com.generated.sources.tables.Articles.ARTICLES;
+import static com.personalshopper.data.tables.Articles.ARTICLES;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -12,7 +12,7 @@ import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
-import com.generated.sources.tables.pojos.Articles;
+import com.personalshopper.data.tables.pojos.Articles;
 
 /**
  * Article worker
@@ -20,6 +20,10 @@ import com.generated.sources.tables.pojos.Articles;
  * @author Ignacio Mulas
  */
 public class ArticleListThread extends DbController implements Callable<List<Articles>> {
+
+	public ArticleListThread() {
+		super();
+	}
 
 	@Override
 	public List<Articles> call() {

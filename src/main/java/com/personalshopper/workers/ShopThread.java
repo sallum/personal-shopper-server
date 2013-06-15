@@ -1,6 +1,6 @@
 package com.personalshopper.workers;
 
-import static com.generated.sources.tables.Shops.SHOPS;
+import static com.personalshopper.data.tables.Shops.SHOPS;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -10,7 +10,7 @@ import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
-import com.generated.sources.tables.pojos.Shops;
+import com.personalshopper.data.tables.pojos.Shops;
 
 /**
  * Shop worker
@@ -22,6 +22,7 @@ public class ShopThread extends DbController implements Callable<Shops> {
 	private final long shopId;
 
 	public ShopThread(long shopId) {
+		super();
 		this.shopId = shopId;
 	}
 
