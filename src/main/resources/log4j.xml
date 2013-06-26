@@ -2,25 +2,18 @@
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
 	debug="false">
-
-	<!-- ================ -->
-	<!-- Appenders -->
-	<!-- ================ -->
-
+	
 	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
 		<param name="Target" value="System.out" />
 		<layout class="org.apache.log4j.PatternLayout">
-<!-- 			<param name="ConversionPattern" value="%d{ISO8601} [%5p] [%c] (%F:%L) %m%n" /> -->
-			<param name="ConversionPattern" value="%d{ISO8601} [%5p] %m%n" />
+			<param name="ConversionPattern" value="%d{ISO8601} [%5p] [%c] (%F:%L) %m%n" />
+<!-- 			<param name="ConversionPattern" value="%d{ISO8601} [%5p] %m%n" /> -->
 		</layout>
-	</appender>
-
-	<!-- ================ -->
-	<!-- Personal Shopper -->
-	<!-- ================ -->
-
-	<logger name="com.personalshopper">
+	</appender>	
+	
+	<root>
 		<level value="DEBUG" />
-	</logger>
+		<appender-ref ref="CONSOLE" />
+	</root>
 
 </log4j:configuration>

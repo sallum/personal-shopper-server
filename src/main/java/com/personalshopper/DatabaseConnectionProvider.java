@@ -1,40 +1,30 @@
-package com.personalshopper.services;
+package com.personalshopper;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
+import com.google.inject.Provider;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.personalshopper.dao.Utils;
 
 /**
- * This class is intended to be a library for common functions with the database
- * and it is extended by all the workers thread that perform tasks in the db
+ * Guice provider for {@link Connection}
  * 
  * @author Ignacio Mulas
+ * 
  */
-public class DbControllerService {
-
-	// TODO: Use guice and put all this class in the provider
+public class DatabaseConnectionProvider implements Provider<ComboPooledDataSource> {
 	private ComboPooledDataSource mCpds;
-	private final Logger logger = Logger.getLogger(DbControllerService.class);
+	private final Logger mLogger = Logger.getLogger(DatabaseConnectionProvider.class);
 
-	public DbControllerService() {
-		if (mCpds == null) {
-			mCpds = new ComboPooledDataSource();
-			setProperties();
-		}
-	}
-
-	public Connection getConnection() throws InstantiationException, IllegalAccessException, ClassNotFoundException,
-			SQLException {
-		return mCpds.getConnection();
-	}
-
-	private void setProperties() {
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ComboPooledDataSource get() {
 		Properties props = null;
 		try {
 			props = Utils.readProperties("datasource.properties");
@@ -49,11 +39,8 @@ public class DbControllerService {
 			mCpds.setMinPoolSize(new Integer(props.getProperty("minPoolSize")));
 			mCpds.setMaxStatements(new Integer(props.getProperty("maxStatements")));
 		} catch (IOException e) {
-			logger.fatal("Could not read database properties");
+			mLogger.fatal("Could not read database properties");
 		}
-
+		return mCpds;
 	}
-
-	// TODO: See how to work with disconnections... is it handled by the pool?
-
 }
