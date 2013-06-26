@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 import org.jooq.DSLContext;
 
 import com.google.inject.Inject;
+import com.personalshopper.jooq.enums.ArticlesType;
 import com.personalshopper.jooq.tables.pojos.Articles;
 import com.personalshopper.jooq.tables.pojos.Shops;
 
@@ -33,11 +34,20 @@ public class Dao extends JooqDao {
 		super(dataSource);
 	}
 
-	public synchronized List<Articles> fetchAllArticles() {
+	public void createArticle(ArticlesType type, String model, String size, String colour, String brand, double price,
+			String shop) {
+		getDbContext()
+				.insertInto(ARTICLES, ARTICLES.TYPE, ARTICLES.MODEL, ARTICLES.SIZE, ARTICLES.COLOUR, ARTICLES.BRAND,
+						ARTICLES.PRICE).values(type, model, size, colour, brand, price).returning(ARTICLES.ARTICLE_ID)
+				.fetchOne().getValue(ARTICLES.ARTICLE_ID);
+		// TODO: Add link to the shop
+	}
+
+	public List<Articles> fetchAllArticles() {
 		return getDbContext().select().from(ARTICLES).fetchInto(Articles.class);
 	}
 
-	public synchronized List<Articles> fetchArticlesByZone(float latitude, float longitude, float radius) {
+	public List<Articles> fetchArticlesByZone(float latitude, float longitude, float radius) {
 		DSLContext context = getDbContext();
 		return context
 				.select()
@@ -49,11 +59,11 @@ public class Dao extends JooqDao {
 				.fetchInto(Articles.class);
 	}
 
-	public synchronized Shops fetchShopById(long shopId) {
+	public Shops fetchShopById(long shopId) {
 		return getDbContext().select().from(SHOPS).where(SHOPS.SHOP_ID.equal(shopId)).fetchAny().into(Shops.class);
 	}
 
-	public synchronized List<Shops> fetchShopsByZone(float latitude, float longitude, float radius) {
+	public List<Shops> fetchShopsByZone(float latitude, float longitude, float radius) {
 		return getDbContext().select().from(SHOPS)
 				.where(SHOPS.LATITUD.between((double) (latitude - radius)).and((double) (latitude + radius)))
 				.and(SHOPS.LONGITUD.between((double) (longitude - radius)).and((double) (longitude + radius)))

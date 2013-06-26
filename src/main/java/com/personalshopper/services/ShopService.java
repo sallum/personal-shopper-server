@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.personalshopper.services;
 
 import java.util.List;

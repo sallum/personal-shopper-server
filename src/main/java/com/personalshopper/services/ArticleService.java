@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -15,6 +15,8 @@ import org.apache.log4j.Logger;
 
 import com.google.inject.Inject;
 import com.personalshopper.dao.Dao;
+import com.personalshopper.entities.CreateArticle;
+import com.personalshopper.jooq.enums.ArticlesType;
 import com.personalshopper.jooq.tables.pojos.Articles;
 
 /**
@@ -46,12 +48,12 @@ public class ArticleService {
 		this.dao = dao;
 	}
 
-	@POST
+	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createTrackInJSON(String entity) {
-		// TODO: Methods POST will be used to introduce data in the db
-		String result = "Post method answer";
-		return Response.status(201).entity(result).build();
+	public Response createArticle(CreateArticle article) {
+		dao.createArticle(ArticlesType.valueOf(article.getType()), article.getModel(), article.getSize(),
+				article.getColour(), article.getBrand(), article.getPrice(), article.getShop());
+		return Response.status(201).build();
 	}
 
 	/**
