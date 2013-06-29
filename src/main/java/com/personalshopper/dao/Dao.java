@@ -73,6 +73,15 @@ public class Dao extends JooqDao {
 	}
 
 	/**
+	 * Deletes an article
+	 * 
+	 * @param id
+	 */
+	public void deleteArticle(long id) {
+		getDbContext().delete(ARTICLE).where(ARTICLE.ARTICLE_ID.equal(id)).execute();
+	}
+
+	/**
 	 * Fetches all articles in the database
 	 * 
 	 * @return
@@ -124,5 +133,15 @@ public class Dao extends JooqDao {
 				.where(SHOP.LATITUD.between((double) (latitude - radius)).and((double) (latitude + radius)))
 				.and(SHOP.LONGITUD.between((double) (longitude - radius)).and((double) (longitude + radius)))
 				.fetchInto(Shop.class);
+	}
+
+	/**
+	 * Get an article by Id
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Article getArticleById(long id) {
+		return getDbContext().select().from(ARTICLE).where(ARTICLE.ARTICLE_ID.equal(id)).fetchOne().into(Article.class);
 	}
 }
