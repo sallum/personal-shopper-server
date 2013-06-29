@@ -11,7 +11,7 @@ package com.personalshopper.jooq.tables;
 @java.lang.SuppressWarnings({ "all", "unchecked" })
 public class Articles extends org.jooq.impl.TableImpl<com.personalshopper.jooq.tables.records.ArticlesRecord> {
 
-	private static final long serialVersionUID = 1435580502;
+	private static final long serialVersionUID = -1061457459;
 
 	/**
 	 * The singleton instance of <code>personal_shopper.articles</code>
@@ -65,6 +65,11 @@ public class Articles extends org.jooq.impl.TableImpl<com.personalshopper.jooq.t
 	 * The column <code>personal_shopper.articles.picture</code>. 
 	 */
 	public final org.jooq.TableField<com.personalshopper.jooq.tables.records.ArticlesRecord, java.lang.String> PICTURE = createField("picture", org.jooq.impl.SQLDataType.CLOB.length(65535), this);
+
+	/**
+	 * The column <code>personal_shopper.articles.date</code>. 
+	 */
+	public final org.jooq.TableField<com.personalshopper.jooq.tables.records.ArticlesRecord, java.sql.Timestamp> DATE = createField("date", org.jooq.impl.SQLDataType.TIMESTAMP, this);
 
 	/**
 	 * Create a <code>personal_shopper.articles</code> table reference

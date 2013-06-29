@@ -2,16 +2,20 @@ package com.personalshopper.services;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.apache.log4j.Logger;
 
 import com.google.inject.Inject;
 import com.personalshopper.dao.Dao;
+import com.personalshopper.entities.CreateShop;
 import com.personalshopper.jooq.tables.pojos.Shops;
 
 /**
@@ -41,6 +45,20 @@ public class ShopService {
 	@Inject
 	public ShopService(Dao dao) {
 		this.dao = dao;
+	}
+
+	/**
+	 * Creates a new shop
+	 * 
+	 * @param shop
+	 * @return
+	 */
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response createShop(CreateShop shop) {
+		dao.createShop(shop.getName(), shop.getEmail(), shop.getLatitude(), shop.getLongitude(), shop.getAddress(),
+				shop.getSchedule());
+		return Response.status(201).build();
 	}
 
 	/**

@@ -11,7 +11,7 @@ package com.personalshopper.jooq.tables.pojos;
 @java.lang.SuppressWarnings({ "all", "unchecked" })
 public class Articles implements java.io.Serializable {
 
-	private static final long serialVersionUID = 783082188;
+	private static final long serialVersionUID = 1338193506;
 
 	private java.lang.Long                              articleId;
 	private com.personalshopper.jooq.enums.ArticlesType type;
@@ -21,6 +21,7 @@ public class Articles implements java.io.Serializable {
 	private java.lang.String                            colour;
 	private java.lang.Double                            price;
 	private java.lang.String                            picture;
+	private java.sql.Timestamp                          date;
 
 	public java.lang.Long getArticleId() {
 		return this.articleId;
@@ -84,5 +85,13 @@ public class Articles implements java.io.Serializable {
 
 	public void setPicture(java.lang.String picture) {
 		this.picture = picture;
+	}
+
+	public java.sql.Timestamp getDate() {
+		return this.date;
+	}
+
+	public void setDate(java.sql.Timestamp date) {
+		this.date = date;
 	}
 }
