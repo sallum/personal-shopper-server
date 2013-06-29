@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
 import com.google.inject.Inject;
 import com.personalshopper.dao.Dao;
 import com.personalshopper.entities.CreateShop;
-import com.personalshopper.jooq.tables.pojos.Shops;
+import com.personalshopper.jooq.tables.pojos.Shop;
 
 /**
  * Rest service for shops
@@ -70,7 +70,7 @@ public class ShopService {
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Shops getShop(@PathParam("id") long shopId) {
+	public Shop getShop(@PathParam("id") long shopId) {
 		return dao.fetchShopById(shopId);
 	}
 
@@ -84,7 +84,7 @@ public class ShopService {
 	@GET
 	@Path("/{latitude}/{longitude}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Shops> getShops(@PathParam("latitude") float latitude, @PathParam("longitude") float longitude) {
+	public List<Shop> getShops(@PathParam("latitude") float latitude, @PathParam("longitude") float longitude) {
 		return dao.fetchShopsByZone(latitude, longitude, RADIUS);
 	}
 

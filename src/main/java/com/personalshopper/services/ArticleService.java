@@ -16,8 +16,8 @@ import org.apache.log4j.Logger;
 import com.google.inject.Inject;
 import com.personalshopper.dao.Dao;
 import com.personalshopper.entities.CreateArticle;
-import com.personalshopper.jooq.enums.ArticlesType;
-import com.personalshopper.jooq.tables.pojos.Articles;
+import com.personalshopper.jooq.enums.ArticleType;
+import com.personalshopper.jooq.tables.pojos.Article;
 
 /**
  * Server's REST interface for articles.
@@ -57,7 +57,7 @@ public class ArticleService {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createArticle(CreateArticle article) {
-		dao.createArticle(ArticlesType.valueOf(article.getType()), article.getModel(), article.getSize(),
+		dao.createArticle(ArticleType.valueOf(article.getType()), article.getModel(), article.getSize(),
 				article.getColour(), article.getBrand(), article.getPrice(), 1);
 		// TODO: Change shopId hard-coded for the shopId of each article
 		return Response.status(201).build();
@@ -70,7 +70,7 @@ public class ArticleService {
 	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Articles> getAllArticles() {
+	public List<Article> getAllArticles() {
 		return dao.fetchAllArticles();
 	}
 
@@ -84,7 +84,7 @@ public class ArticleService {
 	@GET
 	@Path("/{latitude}/{longitude}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Articles> getAllArticlesByLocation(@PathParam("latitude") float latitude,
+	public List<Article> getAllArticlesByLocation(@PathParam("latitude") float latitude,
 			@PathParam("longitude") float longitude) {
 		return dao.fetchArticlesByZone(latitude, longitude, RADIUS);
 	}

@@ -14,9 +14,9 @@ package com.personalshopper.jooq;
 public class Tables {
 
 	/**
-	 * The table personal_shopper.articles
+	 * The table personal_shopper.article
 	 */
-	public static final com.personalshopper.jooq.tables.Articles ARTICLES = com.personalshopper.jooq.tables.Articles.ARTICLES;
+	public static final com.personalshopper.jooq.tables.Article ARTICLE = com.personalshopper.jooq.tables.Article.ARTICLE;
 
 	/**
 	 * The table personal_shopper.article_shop
@@ -24,7 +24,17 @@ public class Tables {
 	public static final com.personalshopper.jooq.tables.ArticleShop ARTICLE_SHOP = com.personalshopper.jooq.tables.ArticleShop.ARTICLE_SHOP;
 
 	/**
-	 * The table personal_shopper.shops
+	 * The table personal_shopper.shop
 	 */
-	public static final com.personalshopper.jooq.tables.Shops SHOPS = com.personalshopper.jooq.tables.Shops.SHOPS;
+	public static final com.personalshopper.jooq.tables.Shop SHOP = com.personalshopper.jooq.tables.Shop.SHOP;
+
+	/**
+	 * The table personal_shopper.user
+	 */
+	public static final com.personalshopper.jooq.tables.User USER = com.personalshopper.jooq.tables.User.USER;
+
+	/**
+	 * The table personal_shopper.user_article
+	 */
+	public static final com.personalshopper.jooq.tables.UserArticle USER_ARTICLE = com.personalshopper.jooq.tables.UserArticle.USER_ARTICLE;
 }

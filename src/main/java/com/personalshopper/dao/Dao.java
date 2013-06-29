@@ -1,8 +1,8 @@
 package com.personalshopper.dao;
 
+import static com.personalshopper.jooq.tables.Article.ARTICLE;
 import static com.personalshopper.jooq.tables.ArticleShop.ARTICLE_SHOP;
-import static com.personalshopper.jooq.tables.Articles.ARTICLES;
-import static com.personalshopper.jooq.tables.Shops.SHOPS;
+import static com.personalshopper.jooq.tables.Shop.SHOP;
 
 import java.util.List;
 
@@ -11,9 +11,9 @@ import javax.sql.DataSource;
 import org.jooq.DSLContext;
 
 import com.google.inject.Inject;
-import com.personalshopper.jooq.enums.ArticlesType;
-import com.personalshopper.jooq.tables.pojos.Articles;
-import com.personalshopper.jooq.tables.pojos.Shops;
+import com.personalshopper.jooq.enums.ArticleType;
+import com.personalshopper.jooq.tables.pojos.Article;
+import com.personalshopper.jooq.tables.pojos.Shop;
 
 /**
  * This class contains the methods to access the databases and run the queries
@@ -45,13 +45,13 @@ public class Dao extends JooqDao {
 	 * @param price
 	 * @param shop
 	 */
-	public void createArticle(ArticlesType type, String model, String size, String colour, String brand, double price,
+	public void createArticle(ArticleType type, String model, String size, String colour, String brand, double price,
 			long shopId) {
 		DSLContext context = getDbContext();
 		long articleId = context
-				.insertInto(ARTICLES, ARTICLES.TYPE, ARTICLES.MODEL, ARTICLES.SIZE, ARTICLES.COLOUR, ARTICLES.BRAND,
-						ARTICLES.PRICE).values(type, model, size, colour, brand, price).returning(ARTICLES.ARTICLE_ID)
-				.fetchOne().getValue(ARTICLES.ARTICLE_ID);
+				.insertInto(ARTICLE, ARTICLE.TYPE, ARTICLE.MODEL, ARTICLE.SIZE, ARTICLE.COLOUR, ARTICLE.BRAND,
+						ARTICLE.PRICE).values(type, model, size, colour, brand, price).returning(ARTICLE.ARTICLE_ID)
+				.fetchOne().getValue(ARTICLE.ARTICLE_ID);
 		context.insertInto(ARTICLE_SHOP, ARTICLE_SHOP.ARTICLE_ID, ARTICLE_SHOP.SHOP_ID).values(articleId, shopId)
 				.execute();
 	}
@@ -67,8 +67,9 @@ public class Dao extends JooqDao {
 	 * @param schedule
 	 */
 	public void createShop(String name, String email, double latitude, double longitude, String address, String schedule) {
-		getDbContext().insertInto(SHOPS, SHOPS.NAME, SHOPS.EMAIL, SHOPS.LATITUD, SHOPS.LONGITUD, SHOPS.ADDRESS,
-				SHOPS.SCHEDULE).values(name, email, latitude, longitude, address, schedule);
+		getDbContext()
+				.insertInto(SHOP, SHOP.NAME, SHOP.EMAIL, SHOP.LATITUD, SHOP.LONGITUD, SHOP.ADDRESS, SHOP.SCHEDULE)
+				.values(name, email, latitude, longitude, address, schedule);
 	}
 
 	/**
@@ -76,8 +77,8 @@ public class Dao extends JooqDao {
 	 * 
 	 * @return
 	 */
-	public List<Articles> fetchAllArticles() {
-		return getDbContext().select().from(ARTICLES).fetchInto(Articles.class);
+	public List<Article> fetchAllArticles() {
+		return getDbContext().select().from(ARTICLE).fetchInto(Article.class);
 	}
 
 	/**
@@ -88,16 +89,16 @@ public class Dao extends JooqDao {
 	 * @param radius
 	 * @return
 	 */
-	public List<Articles> fetchArticlesByZone(float latitude, float longitude, float radius) {
+	public List<Article> fetchArticlesByZone(float latitude, float longitude, float radius) {
 		DSLContext context = getDbContext();
 		return context
 				.select()
-				.from(ARTICLES.leftOuterJoin(SHOPS.join(ARTICLE_SHOP).on(ARTICLE_SHOP.SHOP_ID.equal(SHOPS.SHOP_ID)))
-						.on(ARTICLE_SHOP.ARTICLE_ID.equal(ARTICLES.ARTICLE_ID)))
-				.where(ARTICLE_SHOP.SHOP_ID.equal(context.select(SHOPS.SHOP_ID).from(SHOPS)
-						.where(SHOPS.LATITUD.between((double) (latitude - radius)).and((double) (latitude + radius)))
-						.and(SHOPS.LONGITUD.between((double) (longitude - radius)).and((double) (longitude + radius)))))
-				.fetchInto(Articles.class);
+				.from(ARTICLE.leftOuterJoin(SHOP.join(ARTICLE_SHOP).on(ARTICLE_SHOP.SHOP_ID.equal(SHOP.SHOP_ID))).on(
+						ARTICLE_SHOP.ARTICLE_ID.equal(ARTICLE.ARTICLE_ID)))
+				.where(ARTICLE_SHOP.SHOP_ID.equal(context.select(SHOP.SHOP_ID).from(SHOP)
+						.where(SHOP.LATITUD.between((double) (latitude - radius)).and((double) (latitude + radius)))
+						.and(SHOP.LONGITUD.between((double) (longitude - radius)).and((double) (longitude + radius)))))
+				.fetchInto(Article.class);
 	}
 
 	/**
@@ -106,8 +107,8 @@ public class Dao extends JooqDao {
 	 * @param shopId
 	 * @return
 	 */
-	public Shops fetchShopById(long shopId) {
-		return getDbContext().select().from(SHOPS).where(SHOPS.SHOP_ID.equal(shopId)).fetchAny().into(Shops.class);
+	public Shop fetchShopById(long shopId) {
+		return getDbContext().select().from(SHOP).where(SHOP.SHOP_ID.equal(shopId)).fetchAny().into(Shop.class);
 	}
 
 	/**
@@ -118,10 +119,10 @@ public class Dao extends JooqDao {
 	 * @param radius
 	 * @return
 	 */
-	public List<Shops> fetchShopsByZone(float latitude, float longitude, float radius) {
-		return getDbContext().select().from(SHOPS)
-				.where(SHOPS.LATITUD.between((double) (latitude - radius)).and((double) (latitude + radius)))
-				.and(SHOPS.LONGITUD.between((double) (longitude - radius)).and((double) (longitude + radius)))
-				.fetchInto(Shops.class);
+	public List<Shop> fetchShopsByZone(float latitude, float longitude, float radius) {
+		return getDbContext().select().from(SHOP)
+				.where(SHOP.LATITUD.between((double) (latitude - radius)).and((double) (latitude + radius)))
+				.and(SHOP.LONGITUD.between((double) (longitude - radius)).and((double) (longitude + radius)))
+				.fetchInto(Shop.class);
 	}
 }

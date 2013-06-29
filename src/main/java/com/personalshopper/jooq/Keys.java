@@ -18,45 +18,53 @@ public class Keys {
 	// IDENTITY definitions
 	// -------------------------------------------------------------------------
 
-	public static final org.jooq.Identity<com.personalshopper.jooq.tables.records.ArticlesRecord, java.lang.Long> IDENTITY_ARTICLES = Identities0.IDENTITY_ARTICLES;
-	public static final org.jooq.Identity<com.personalshopper.jooq.tables.records.ShopsRecord, java.lang.Long> IDENTITY_SHOPS = Identities0.IDENTITY_SHOPS;
+	public static final org.jooq.Identity<com.personalshopper.jooq.tables.records.ArticleRecord, java.lang.Long> IDENTITY_ARTICLE = Identities0.IDENTITY_ARTICLE;
+	public static final org.jooq.Identity<com.personalshopper.jooq.tables.records.ShopRecord, java.lang.Long> IDENTITY_SHOP = Identities0.IDENTITY_SHOP;
+	public static final org.jooq.Identity<com.personalshopper.jooq.tables.records.UserRecord, java.lang.Long> IDENTITY_USER = Identities0.IDENTITY_USER;
 
 	// -------------------------------------------------------------------------
 	// UNIQUE and PRIMARY KEY definitions
 	// -------------------------------------------------------------------------
 
-	public static final org.jooq.UniqueKey<com.personalshopper.jooq.tables.records.ArticlesRecord> KEY_ARTICLES_PRIMARY = UniqueKeys0.KEY_ARTICLES_PRIMARY;
-	public static final org.jooq.UniqueKey<com.personalshopper.jooq.tables.records.ArticlesRecord> KEY_ARTICLES_ARTICLE_ID = UniqueKeys0.KEY_ARTICLES_ARTICLE_ID;
+	public static final org.jooq.UniqueKey<com.personalshopper.jooq.tables.records.ArticleRecord> KEY_ARTICLE_PRIMARY = UniqueKeys0.KEY_ARTICLE_PRIMARY;
+	public static final org.jooq.UniqueKey<com.personalshopper.jooq.tables.records.ArticleRecord> KEY_ARTICLE_ARTICLE_ID = UniqueKeys0.KEY_ARTICLE_ARTICLE_ID;
 	public static final org.jooq.UniqueKey<com.personalshopper.jooq.tables.records.ArticleShopRecord> KEY_ARTICLE_SHOP_PRIMARY = UniqueKeys0.KEY_ARTICLE_SHOP_PRIMARY;
-	public static final org.jooq.UniqueKey<com.personalshopper.jooq.tables.records.ShopsRecord> KEY_SHOPS_PRIMARY = UniqueKeys0.KEY_SHOPS_PRIMARY;
-	public static final org.jooq.UniqueKey<com.personalshopper.jooq.tables.records.ShopsRecord> KEY_SHOPS_SHOP_ID = UniqueKeys0.KEY_SHOPS_SHOP_ID;
+	public static final org.jooq.UniqueKey<com.personalshopper.jooq.tables.records.ShopRecord> KEY_SHOP_PRIMARY = UniqueKeys0.KEY_SHOP_PRIMARY;
+	public static final org.jooq.UniqueKey<com.personalshopper.jooq.tables.records.ShopRecord> KEY_SHOP_SHOP_ID = UniqueKeys0.KEY_SHOP_SHOP_ID;
+	public static final org.jooq.UniqueKey<com.personalshopper.jooq.tables.records.UserRecord> KEY_USER_PRIMARY = UniqueKeys0.KEY_USER_PRIMARY;
 
 	// -------------------------------------------------------------------------
 	// FOREIGN KEY definitions
 	// -------------------------------------------------------------------------
 
-	public static final org.jooq.ForeignKey<com.personalshopper.jooq.tables.records.ArticleShopRecord, com.personalshopper.jooq.tables.records.ArticlesRecord> ARTICLE_SHOP_IBFK_1 = ForeignKeys0.ARTICLE_SHOP_IBFK_1;
-	public static final org.jooq.ForeignKey<com.personalshopper.jooq.tables.records.ArticleShopRecord, com.personalshopper.jooq.tables.records.ShopsRecord> ARTICLE_SHOP_IBFK_2 = ForeignKeys0.ARTICLE_SHOP_IBFK_2;
+	public static final org.jooq.ForeignKey<com.personalshopper.jooq.tables.records.ArticleShopRecord, com.personalshopper.jooq.tables.records.ArticleRecord> ARTICLE_SHOP_IBFK_1 = ForeignKeys0.ARTICLE_SHOP_IBFK_1;
+	public static final org.jooq.ForeignKey<com.personalshopper.jooq.tables.records.ArticleShopRecord, com.personalshopper.jooq.tables.records.ShopRecord> ARTICLE_SHOP_IBFK_2 = ForeignKeys0.ARTICLE_SHOP_IBFK_2;
+	public static final org.jooq.ForeignKey<com.personalshopper.jooq.tables.records.UserArticleRecord, com.personalshopper.jooq.tables.records.UserRecord> USER_ARTICLE_IBFK_1 = ForeignKeys0.USER_ARTICLE_IBFK_1;
+	public static final org.jooq.ForeignKey<com.personalshopper.jooq.tables.records.UserArticleRecord, com.personalshopper.jooq.tables.records.ArticleRecord> USER_ARTICLE_IBFK_2 = ForeignKeys0.USER_ARTICLE_IBFK_2;
 
 	// -------------------------------------------------------------------------
 	// [#1459] distribute members to avoid static initialisers > 64kb
 	// -------------------------------------------------------------------------
 
 	private static class Identities0 extends org.jooq.impl.AbstractKeys {
-		public static org.jooq.Identity<com.personalshopper.jooq.tables.records.ArticlesRecord, java.lang.Long> IDENTITY_ARTICLES = createIdentity(com.personalshopper.jooq.tables.Articles.ARTICLES, com.personalshopper.jooq.tables.Articles.ARTICLES.ARTICLE_ID);
-		public static org.jooq.Identity<com.personalshopper.jooq.tables.records.ShopsRecord, java.lang.Long> IDENTITY_SHOPS = createIdentity(com.personalshopper.jooq.tables.Shops.SHOPS, com.personalshopper.jooq.tables.Shops.SHOPS.SHOP_ID);
+		public static org.jooq.Identity<com.personalshopper.jooq.tables.records.ArticleRecord, java.lang.Long> IDENTITY_ARTICLE = createIdentity(com.personalshopper.jooq.tables.Article.ARTICLE, com.personalshopper.jooq.tables.Article.ARTICLE.ARTICLE_ID);
+		public static org.jooq.Identity<com.personalshopper.jooq.tables.records.ShopRecord, java.lang.Long> IDENTITY_SHOP = createIdentity(com.personalshopper.jooq.tables.Shop.SHOP, com.personalshopper.jooq.tables.Shop.SHOP.SHOP_ID);
+		public static org.jooq.Identity<com.personalshopper.jooq.tables.records.UserRecord, java.lang.Long> IDENTITY_USER = createIdentity(com.personalshopper.jooq.tables.User.USER, com.personalshopper.jooq.tables.User.USER.USER_ID);
 	}
 
 	private static class UniqueKeys0 extends org.jooq.impl.AbstractKeys {
-		public static final org.jooq.UniqueKey<com.personalshopper.jooq.tables.records.ArticlesRecord> KEY_ARTICLES_PRIMARY = createUniqueKey(com.personalshopper.jooq.tables.Articles.ARTICLES, com.personalshopper.jooq.tables.Articles.ARTICLES.ARTICLE_ID);
-		public static final org.jooq.UniqueKey<com.personalshopper.jooq.tables.records.ArticlesRecord> KEY_ARTICLES_ARTICLE_ID = createUniqueKey(com.personalshopper.jooq.tables.Articles.ARTICLES, com.personalshopper.jooq.tables.Articles.ARTICLES.ARTICLE_ID);
+		public static final org.jooq.UniqueKey<com.personalshopper.jooq.tables.records.ArticleRecord> KEY_ARTICLE_PRIMARY = createUniqueKey(com.personalshopper.jooq.tables.Article.ARTICLE, com.personalshopper.jooq.tables.Article.ARTICLE.ARTICLE_ID);
+		public static final org.jooq.UniqueKey<com.personalshopper.jooq.tables.records.ArticleRecord> KEY_ARTICLE_ARTICLE_ID = createUniqueKey(com.personalshopper.jooq.tables.Article.ARTICLE, com.personalshopper.jooq.tables.Article.ARTICLE.ARTICLE_ID);
 		public static final org.jooq.UniqueKey<com.personalshopper.jooq.tables.records.ArticleShopRecord> KEY_ARTICLE_SHOP_PRIMARY = createUniqueKey(com.personalshopper.jooq.tables.ArticleShop.ARTICLE_SHOP, com.personalshopper.jooq.tables.ArticleShop.ARTICLE_SHOP.ARTICLE_ID);
-		public static final org.jooq.UniqueKey<com.personalshopper.jooq.tables.records.ShopsRecord> KEY_SHOPS_PRIMARY = createUniqueKey(com.personalshopper.jooq.tables.Shops.SHOPS, com.personalshopper.jooq.tables.Shops.SHOPS.SHOP_ID);
-		public static final org.jooq.UniqueKey<com.personalshopper.jooq.tables.records.ShopsRecord> KEY_SHOPS_SHOP_ID = createUniqueKey(com.personalshopper.jooq.tables.Shops.SHOPS, com.personalshopper.jooq.tables.Shops.SHOPS.SHOP_ID);
+		public static final org.jooq.UniqueKey<com.personalshopper.jooq.tables.records.ShopRecord> KEY_SHOP_PRIMARY = createUniqueKey(com.personalshopper.jooq.tables.Shop.SHOP, com.personalshopper.jooq.tables.Shop.SHOP.SHOP_ID);
+		public static final org.jooq.UniqueKey<com.personalshopper.jooq.tables.records.ShopRecord> KEY_SHOP_SHOP_ID = createUniqueKey(com.personalshopper.jooq.tables.Shop.SHOP, com.personalshopper.jooq.tables.Shop.SHOP.SHOP_ID);
+		public static final org.jooq.UniqueKey<com.personalshopper.jooq.tables.records.UserRecord> KEY_USER_PRIMARY = createUniqueKey(com.personalshopper.jooq.tables.User.USER, com.personalshopper.jooq.tables.User.USER.USER_ID);
 	}
 
 	private static class ForeignKeys0 extends org.jooq.impl.AbstractKeys {
-		public static final org.jooq.ForeignKey<com.personalshopper.jooq.tables.records.ArticleShopRecord, com.personalshopper.jooq.tables.records.ArticlesRecord> ARTICLE_SHOP_IBFK_1 = createForeignKey(com.personalshopper.jooq.Keys.KEY_ARTICLES_PRIMARY, com.personalshopper.jooq.tables.ArticleShop.ARTICLE_SHOP, com.personalshopper.jooq.tables.ArticleShop.ARTICLE_SHOP.ARTICLE_ID);
-		public static final org.jooq.ForeignKey<com.personalshopper.jooq.tables.records.ArticleShopRecord, com.personalshopper.jooq.tables.records.ShopsRecord> ARTICLE_SHOP_IBFK_2 = createForeignKey(com.personalshopper.jooq.Keys.KEY_SHOPS_PRIMARY, com.personalshopper.jooq.tables.ArticleShop.ARTICLE_SHOP, com.personalshopper.jooq.tables.ArticleShop.ARTICLE_SHOP.SHOP_ID);
+		public static final org.jooq.ForeignKey<com.personalshopper.jooq.tables.records.ArticleShopRecord, com.personalshopper.jooq.tables.records.ArticleRecord> ARTICLE_SHOP_IBFK_1 = createForeignKey(com.personalshopper.jooq.Keys.KEY_ARTICLE_PRIMARY, com.personalshopper.jooq.tables.ArticleShop.ARTICLE_SHOP, com.personalshopper.jooq.tables.ArticleShop.ARTICLE_SHOP.ARTICLE_ID);
+		public static final org.jooq.ForeignKey<com.personalshopper.jooq.tables.records.ArticleShopRecord, com.personalshopper.jooq.tables.records.ShopRecord> ARTICLE_SHOP_IBFK_2 = createForeignKey(com.personalshopper.jooq.Keys.KEY_SHOP_PRIMARY, com.personalshopper.jooq.tables.ArticleShop.ARTICLE_SHOP, com.personalshopper.jooq.tables.ArticleShop.ARTICLE_SHOP.SHOP_ID);
+		public static final org.jooq.ForeignKey<com.personalshopper.jooq.tables.records.UserArticleRecord, com.personalshopper.jooq.tables.records.UserRecord> USER_ARTICLE_IBFK_1 = createForeignKey(com.personalshopper.jooq.Keys.KEY_USER_PRIMARY, com.personalshopper.jooq.tables.UserArticle.USER_ARTICLE, com.personalshopper.jooq.tables.UserArticle.USER_ARTICLE.USER_ID);
+		public static final org.jooq.ForeignKey<com.personalshopper.jooq.tables.records.UserArticleRecord, com.personalshopper.jooq.tables.records.ArticleRecord> USER_ARTICLE_IBFK_2 = createForeignKey(com.personalshopper.jooq.Keys.KEY_ARTICLE_PRIMARY, com.personalshopper.jooq.tables.UserArticle.USER_ARTICLE, com.personalshopper.jooq.tables.UserArticle.USER_ARTICLE.ARTICLE_ID);
 	}
 }

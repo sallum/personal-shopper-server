@@ -11,7 +11,7 @@ package com.personalshopper.jooq;
 @java.lang.SuppressWarnings({ "all", "unchecked" })
 public class PersonalShopper extends org.jooq.impl.SchemaImpl {
 
-	private static final long serialVersionUID = 674395471;
+	private static final long serialVersionUID = -353064754;
 
 	/**
 	 * The singleton instance of <code>personal_shopper</code>
@@ -34,8 +34,10 @@ public class PersonalShopper extends org.jooq.impl.SchemaImpl {
 
 	private final java.util.List<org.jooq.Table<?>> getTables0() {
 		return java.util.Arrays.<org.jooq.Table<?>>asList(
-			com.personalshopper.jooq.tables.Articles.ARTICLES,
+			com.personalshopper.jooq.tables.Article.ARTICLE,
 			com.personalshopper.jooq.tables.ArticleShop.ARTICLE_SHOP,
-			com.personalshopper.jooq.tables.Shops.SHOPS);
+			com.personalshopper.jooq.tables.Shop.SHOP,
+			com.personalshopper.jooq.tables.User.USER,
+			com.personalshopper.jooq.tables.UserArticle.USER_ARTICLE);
 	}
 }
