@@ -59,8 +59,7 @@ public class ArticleService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createArticle(CreateArticle article) {
 		dao.createArticle(ArticleType.valueOf(article.getType()), article.getModel(), article.getSize(),
-				article.getColour(), article.getBrand(), article.getPrice(), 1);
-		// TODO: Change shopId hard-coded for the shopId of each article
+				article.getColour(), article.getBrand(), article.getPrice(), article.getShopId());
 		return Response.status(201).build();
 	}
 

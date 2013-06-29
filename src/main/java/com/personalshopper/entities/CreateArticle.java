@@ -16,14 +16,14 @@ public class CreateArticle {
 	// "prize": "100",
 	// "size": "L",
 	// "type": "shoes",
-	// "shop": "laTiendaDelBarrio"
+	// "shop": 1
 	// }
 
 	private String brand;
 	private String colour;
 	private String model;
 	private double price;
-	private String shop;
+	private long shopId;
 	private String size;
 	private String type;
 
@@ -64,8 +64,8 @@ public class CreateArticle {
 	/**
 	 * @return the shop
 	 */
-	public String getShop() {
-		return shop;
+	public long getShopId() {
+		return shopId;
 	}
 
 	/**
@@ -118,8 +118,8 @@ public class CreateArticle {
 	 * @param shop
 	 *            the shop to set
 	 */
-	public void setShop(String shop) {
-		this.shop = shop;
+	public void setShopId(long shopId) {
+		this.shopId = shopId;
 	}
 
 	/**
