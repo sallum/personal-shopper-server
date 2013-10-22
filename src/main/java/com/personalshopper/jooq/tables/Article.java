@@ -11,7 +11,7 @@ package com.personalshopper.jooq.tables;
 @java.lang.SuppressWarnings({ "all", "unchecked" })
 public class Article extends org.jooq.impl.TableImpl<com.personalshopper.jooq.tables.records.ArticleRecord> {
 
-	private static final long serialVersionUID = -1892973978;
+	private static final long serialVersionUID = -164262455;
 
 	/**
 	 * The singleton instance of <code>personal_shopper.article</code>
@@ -62,9 +62,9 @@ public class Article extends org.jooq.impl.TableImpl<com.personalshopper.jooq.ta
 	public final org.jooq.TableField<com.personalshopper.jooq.tables.records.ArticleRecord, java.lang.Double> PRICE = createField("price", org.jooq.impl.SQLDataType.FLOAT, this);
 
 	/**
-	 * The column <code>personal_shopper.article.picture</code>. 
+	 * The column <code>personal_shopper.article.image</code>. 
 	 */
-	public final org.jooq.TableField<com.personalshopper.jooq.tables.records.ArticleRecord, java.lang.String> PICTURE = createField("picture", org.jooq.impl.SQLDataType.CLOB.length(65535), this);
+	public final org.jooq.TableField<com.personalshopper.jooq.tables.records.ArticleRecord, java.lang.String> IMAGE = createField("image", org.jooq.impl.SQLDataType.CLOB.length(65535), this);
 
 	/**
 	 * The column <code>personal_shopper.article.date</code>. 

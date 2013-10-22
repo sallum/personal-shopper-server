@@ -3,8 +3,11 @@ package com.personalshopper.dao;
 import static com.personalshopper.jooq.tables.Article.ARTICLE;
 import static com.personalshopper.jooq.tables.ArticleShop.ARTICLE_SHOP;
 import static com.personalshopper.jooq.tables.Shop.SHOP;
+import static com.personalshopper.jooq.tables.User.USER;
 
+import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -12,6 +15,7 @@ import org.jooq.DSLContext;
 
 import com.google.inject.Inject;
 import com.personalshopper.jooq.enums.ArticleType;
+import com.personalshopper.jooq.enums.UserUserGender;
 import com.personalshopper.jooq.tables.pojos.Article;
 import com.personalshopper.jooq.tables.pojos.Shop;
 
@@ -73,6 +77,26 @@ public class Dao extends JooqDao {
 	}
 
 	/**
+	 * Create new user
+	 * 
+	 * @param userName
+	 * @param birthday
+	 * @param gender
+	 * @param sizePants
+	 * @param sizeShirts
+	 * @param sizeShoes
+	 * @param email
+	 */
+	public void createUser(String userName, Date birthday, String gender, String sizePants, String sizeShirts,
+			String sizeShoes, String email) {
+		getDbContext()
+				.insertInto(USER, USER.USER_NAME, USER.USER_BIRTHDAY, USER.USER_GENDER, USER.USER_SIZE_PANTS,
+						USER.USER_SIZE_SHIRT, USER.USER_SIZE_SHOES, USER.USER_EMAIL)
+				.values(userName, birthday, UserUserGender.valueOf(gender), sizePants, sizeShirts, sizeShoes, email)
+				.execute();
+	}
+
+	/**
 	 * Deletes an article
 	 * 
 	 * @param id
@@ -86,8 +110,12 @@ public class Dao extends JooqDao {
 	 * 
 	 * @return
 	 */
-	public List<Article> fetchAllArticles() {
-		return getDbContext().select().from(ARTICLE).fetchInto(Article.class);
+	public List<Map<String, Object>> fetchAllArticles() {
+		List<Map<String, Object>> articles = getDbContext()
+				.select(ARTICLE.ARTICLE_ID, ARTICLE.BRAND, ARTICLE.COLOUR, ARTICLE.MODEL, ARTICLE.IMAGE, ARTICLE.PRICE,
+						ARTICLE.SIZE, ARTICLE.TYPE, ARTICLE_SHOP.SHOP_ID).from(ARTICLE).naturalJoin(ARTICLE_SHOP)
+				.fetchMaps();
+		return articles;
 	}
 
 	/**
@@ -144,4 +172,5 @@ public class Dao extends JooqDao {
 	public Article getArticleById(long id) {
 		return getDbContext().select().from(ARTICLE).where(ARTICLE.ARTICLE_ID.equal(id)).fetchOne().into(Article.class);
 	}
+
 }

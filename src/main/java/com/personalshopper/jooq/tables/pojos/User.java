@@ -11,11 +11,11 @@ package com.personalshopper.jooq.tables.pojos;
 @java.lang.SuppressWarnings({ "all", "unchecked" })
 public class User implements java.io.Serializable {
 
-	private static final long serialVersionUID = -1234088710;
+	private static final long serialVersionUID = 240301167;
 
 	private java.lang.Long                                userId;
 	private java.lang.String                              userName;
-	private java.lang.Integer                             userEmail;
+	private java.lang.String                              userEmail;
 	private java.sql.Date                                 userBirthday;
 	private com.personalshopper.jooq.enums.UserUserGender userGender;
 	private java.lang.String                              userSizeShirt;
@@ -38,11 +38,11 @@ public class User implements java.io.Serializable {
 		this.userName = userName;
 	}
 
-	public java.lang.Integer getUserEmail() {
+	public java.lang.String getUserEmail() {
 		return this.userEmail;
 	}
 
-	public void setUserEmail(java.lang.Integer userEmail) {
+	public void setUserEmail(java.lang.String userEmail) {
 		this.userEmail = userEmail;
 	}
 

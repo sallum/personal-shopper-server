@@ -11,7 +11,7 @@ package com.personalshopper.jooq.tables.records;
 @java.lang.SuppressWarnings({ "all", "unchecked" })
 public class ArticleRecord extends org.jooq.impl.UpdatableRecordImpl<com.personalshopper.jooq.tables.records.ArticleRecord> implements org.jooq.Record9<java.lang.Long, com.personalshopper.jooq.enums.ArticleType, java.lang.String, java.lang.String, java.lang.Object, java.lang.String, java.lang.Double, java.lang.String, java.sql.Timestamp> {
 
-	private static final long serialVersionUID = 1935582772;
+	private static final long serialVersionUID = -8261356;
 
 	/**
 	 * Setter for <code>personal_shopper.article.article_id</code>. 
@@ -112,16 +112,16 @@ public class ArticleRecord extends org.jooq.impl.UpdatableRecordImpl<com.persona
 	}
 
 	/**
-	 * Setter for <code>personal_shopper.article.picture</code>. 
+	 * Setter for <code>personal_shopper.article.image</code>. 
 	 */
-	public void setPicture(java.lang.String value) {
+	public void setImage(java.lang.String value) {
 		setValue(7, value);
 	}
 
 	/**
-	 * Getter for <code>personal_shopper.article.picture</code>. 
+	 * Getter for <code>personal_shopper.article.image</code>. 
 	 */
-	public java.lang.String getPicture() {
+	public java.lang.String getImage() {
 		return (java.lang.String) getValue(7);
 	}
 
@@ -232,7 +232,7 @@ public class ArticleRecord extends org.jooq.impl.UpdatableRecordImpl<com.persona
 	 */
 	@Override
 	public org.jooq.Field<java.lang.String> field8() {
-		return com.personalshopper.jooq.tables.Article.ARTICLE.PICTURE;
+		return com.personalshopper.jooq.tables.Article.ARTICLE.IMAGE;
 	}
 
 	/**
@@ -304,7 +304,7 @@ public class ArticleRecord extends org.jooq.impl.UpdatableRecordImpl<com.persona
 	 */
 	@Override
 	public java.lang.String value8() {
-		return getPicture();
+		return getImage();
 	}
 
 	/**

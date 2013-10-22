@@ -11,7 +11,7 @@ package com.personalshopper.jooq.tables;
 @java.lang.SuppressWarnings({ "all", "unchecked" })
 public class User extends org.jooq.impl.TableImpl<com.personalshopper.jooq.tables.records.UserRecord> {
 
-	private static final long serialVersionUID = -2020611019;
+	private static final long serialVersionUID = -1877580009;
 
 	/**
 	 * The singleton instance of <code>personal_shopper.user</code>
@@ -39,7 +39,7 @@ public class User extends org.jooq.impl.TableImpl<com.personalshopper.jooq.table
 	/**
 	 * The column <code>personal_shopper.user.user_email</code>. 
 	 */
-	public final org.jooq.TableField<com.personalshopper.jooq.tables.records.UserRecord, java.lang.Integer> USER_EMAIL = createField("user_email", org.jooq.impl.SQLDataType.INTEGER, this);
+	public final org.jooq.TableField<com.personalshopper.jooq.tables.records.UserRecord, java.lang.String> USER_EMAIL = createField("user_email", org.jooq.impl.SQLDataType.VARCHAR.length(45), this);
 
 	/**
 	 * The column <code>personal_shopper.user.user_birthday</code>. 

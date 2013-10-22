@@ -1,9 +1,11 @@
-		{
-		"brand": "nike",
-		"colour": "GREEN",
-		"model": "mymodel",
-		"price": 100.235,
-		"size": "L",
-		"type": "shoes",
-		"shop": 1
-		} 
+{
+	"article_id": 2,
+	"brand": "Nike",
+	"colour": "black",
+	"model": "article 124345",
+	"image": "http://www.somosjovenes.cu/index/imagen77/monsonr.jpg",
+	"price": 100.65,
+	"size": "45",
+	"type": "shoe",
+	"shop_id": 1
+}

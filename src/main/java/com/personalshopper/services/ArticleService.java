@@ -1,6 +1,7 @@
 package com.personalshopper.services;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -83,7 +84,7 @@ public class ArticleService {
 	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Article> getAllArticles() {
+	public List<Map<String, Object>> getAllArticles() {
 		return dao.fetchAllArticles();
 	}
 

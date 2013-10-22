@@ -11,10 +11,11 @@ package com.personalshopper.jooq.tables.pojos;
 @java.lang.SuppressWarnings({ "all", "unchecked" })
 public class UserArticle implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1770129148;
+	private static final long serialVersionUID = 114349778;
 
-	private java.lang.Long userId;
-	private java.lang.Long articleId;
+	private java.lang.Long     userId;
+	private java.lang.Long     articleId;
+	private java.sql.Timestamp visitTime;
 
 	public java.lang.Long getUserId() {
 		return this.userId;
@@ -30,5 +31,13 @@ public class UserArticle implements java.io.Serializable {
 
 	public void setArticleId(java.lang.Long articleId) {
 		this.articleId = articleId;
+	}
+
+	public java.sql.Timestamp getVisitTime() {
+		return this.visitTime;
+	}
+
+	public void setVisitTime(java.sql.Timestamp visitTime) {
+		this.visitTime = visitTime;
 	}
 }

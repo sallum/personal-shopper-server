@@ -11,7 +11,7 @@ package com.personalshopper.jooq.tables;
 @java.lang.SuppressWarnings({ "all", "unchecked" })
 public class UserArticle extends org.jooq.impl.TableImpl<com.personalshopper.jooq.tables.records.UserArticleRecord> {
 
-	private static final long serialVersionUID = -618664541;
+	private static final long serialVersionUID = 1997040690;
 
 	/**
 	 * The singleton instance of <code>personal_shopper.user_article</code>
@@ -35,6 +35,11 @@ public class UserArticle extends org.jooq.impl.TableImpl<com.personalshopper.joo
 	 * The column <code>personal_shopper.user_article.article_id</code>. 
 	 */
 	public final org.jooq.TableField<com.personalshopper.jooq.tables.records.UserArticleRecord, java.lang.Long> ARTICLE_ID = createField("article_id", org.jooq.impl.SQLDataType.BIGINT, this);
+
+	/**
+	 * The column <code>personal_shopper.user_article.visit_time</code>. 
+	 */
+	public final org.jooq.TableField<com.personalshopper.jooq.tables.records.UserArticleRecord, java.sql.Timestamp> VISIT_TIME = createField("visit_time", org.jooq.impl.SQLDataType.TIMESTAMP, this);
 
 	/**
 	 * Create a <code>personal_shopper.user_article</code> table reference
